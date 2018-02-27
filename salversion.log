@@ -1,0 +1,98 @@
+WARNING:django.request:Not Found: /favicon.ico
+ERROR:django.request:Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/graham_gilbert/Dropbox (Personal)/src/Mine/salversion/collector/views.py", line 73, in index
+    return HttpResponse(current_version())
+  File "/Users/graham_gilbert/Dropbox (Personal)/src/Mine/salversion/collector/views.py", line 34, in current_version
+    update_current_version()
+  File "/Users/graham_gilbert/Dropbox (Personal)/src/Mine/salversion/collector/views.py", line 25, in update_current_version
+    version = req.json[0]['tag_name']
+TypeError: 'method' object is not subscriptable
+ERROR:django.request:Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/graham_gilbert/Dropbox (Personal)/src/Mine/salversion/collector/views.py", line 84, in index
+    return HttpResponse(current_version())
+  File "/Users/graham_gilbert/Dropbox (Personal)/src/Mine/salversion/collector/views.py", line 38, in current_version
+    if version_object.updated < now - timezone.timedelta(days=1):
+AttributeError: 'QuerySet' object has no attribute 'updated'
+ERROR:django.request:Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: collector_setting.updated
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/graham_gilbert/Dropbox (Personal)/src/Mine/salversion/collector/views.py", line 84, in index
+    return HttpResponse(current_version())
+  File "/Users/graham_gilbert/Dropbox (Personal)/src/Mine/salversion/collector/views.py", line 35, in current_version
+    version_object = Setting.objects.get(name='version')
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/models/query.py", line 397, in get
+    num = len(clone)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/models/query.py", line 254, in __len__
+    self._fetch_all()
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/models/query.py", line 1179, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/models/query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/models/sql/compiler.py", line 1064, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/backends/utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/backends/utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/backends/utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: collector_setting.updated
+ERROR:django.request:Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/graham_gilbert/virtualenvs/salversion/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/graham_gilbert/Dropbox (Personal)/src/Mine/salversion/collector/views.py", line 84, in index
+    return HttpResponse(current_version())
+  File "/Users/graham_gilbert/Dropbox (Personal)/src/Mine/salversion/collector/views.py", line 36, in current_version
+    if version_object.exists():
+AttributeError: 'Setting' object has no attribute 'exists'
