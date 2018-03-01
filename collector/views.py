@@ -32,9 +32,9 @@ def update_current_version():
     return obj
 
 def current_version():
-    version_object = Setting.objects.get(name='version')
     if Setting.objects.filter(name='version').exists():
         now = timezone.now()
+        version_object = Setting.objects.get(name='version')
         if version_object.updated < now - timezone.timedelta(days=1):
             print('Getting a new version')
             obj = update_current_version()
