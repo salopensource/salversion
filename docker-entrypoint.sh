@@ -10,7 +10,7 @@ sleep 10
 
 if [ "$DJANGO_MANAGEPY_MIGRATE" = 'on' ]; then
     /venv/bin/python manage.py migrate --noinput
-Fi
+fi
 
 if [ "$DJANGO_MANAGEPY_COLLECTSTATIC" = 'on' ]; then
     /venv/bin/python manage.py collectstatic --noinput
