@@ -3,7 +3,7 @@ FROM python:3.7-alpine
 ADD requirements.txt /requirements.txt
 
 RUN set -ex \
-    && buildDeps="gcc make libc-dev musl-dev linux-headers pcre-dev postgresql-dev postgresql-client" \
+    && buildDeps="gcc make libc-dev musl-dev linux-headers pcre-dev postgresql-dev postgresql-client expat-dev" \
     # && runDeps="postgresql-client postgresql-dev" \
     && apk add --no-cache --virtual .build-deps $buildDeps \
     && python3.7 -m venv /venv \
