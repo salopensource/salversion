@@ -23,7 +23,10 @@ def update_current_version():
     if req.status_code != requests.codes.ok:
         return
 
-    version = req.json()[0]['tag_name']
+    for release in req.json():
+        if req.json()[0]['prerelease'] == False:
+            version = release['tag_name']
+            break
     obj, created = Setting.objects.update_or_create(
         name='version',
         defaults={'value': version},
