@@ -24,7 +24,7 @@ def update_current_version():
         return
 
     for release in req.json():
-        if req.json()[0]['prerelease'] == False:
+        if release.get('prerelease', False) == False:
             version = release['tag_name']
             break
     obj, created = Setting.objects.update_or_create(
