@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.7-alpine
 
 ADD requirements.txt /requirements.txt
 
@@ -6,7 +6,7 @@ RUN set -ex \
     && buildDeps="gcc make libc-dev musl-dev linux-headers pcre-dev postgresql-dev postgresql-client" \
     # && runDeps="postgresql-client postgresql-dev" \
     && apk add --no-cache --virtual .build-deps $buildDeps \
-    && python3.6 -m venv /venv \
+    && python3.7 -m venv /venv \
     && /venv/bin/pip install -U pip \
     && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "/venv/bin/pip install --no-cache-dir -r /requirements.txt" \
     # && apk del .build-deps $buildDeps \
