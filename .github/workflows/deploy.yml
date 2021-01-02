@@ -1,7 +1,5 @@
 name: Build and deploy
-  push:
-    branches:
-      - master # Set a branch to deploy
+on: [push, pull_request]
 
 jobs:
   deploy:
