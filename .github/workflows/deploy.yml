@@ -1,0 +1,23 @@
+name: Build and deploy
+  push:
+    branches:
+      - master # Set a branch to deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCS_PROJECT }}
+          service_account_key: ${{ secrets.GCS_SA_KEY }}
+          export_default_credentials: true
+      - name: Deploy
+        if: github.ref == 'refs/heads/master'
+        run: |-
+          gcloud app deploy
