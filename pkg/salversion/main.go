@@ -94,36 +94,10 @@ func saveData(ctx context.Context, r *http.Request) error {
 }
 
 func salVersion(ctx context.Context) (string, error) {
-	var currentVersion SalVersion
-	doc, found, err := firestore.GetDocument(ctx, "Settings", "CurrentVersion")
-	if !found {
-		// Don't have a current one, get the newest
-		log.Info("No current version found")
-		currentVersion, err := getSalVersion(ctx)
-		if err != nil {
-			return "", err
-		}
-		return currentVersion.CurrentVersion, nil
-	}
 
-	if err != nil {
-		// Something went wrong, return an error
-		return "", err
-	}
-
-	err = doc.DataTo(&currentVersion)
+	currentVersion, err := getSalVersion(ctx)
 	if err != nil {
 		return "", err
-	}
-
-	now := time.Now()
-	oneDayAgo := now.Add(-24 * time.Hour)
-	if currentVersion.LastChecked.Before(oneDayAgo) {
-		currentVersion, err := getSalVersion(ctx)
-		if err != nil {
-			return "", err
-		}
-		return currentVersion.CurrentVersion, nil
 	}
 
 	return currentVersion.CurrentVersion, nil
@@ -168,11 +142,11 @@ func getSalVersion(ctx context.Context) (SalVersion, error) {
 			salVersion.CurrentVersion = item.TagName
 			salVersion.LastChecked = time.Now()
 
-			m := structs.Map(salVersion)
-			err := firestore.SetDocument(ctx, "Settings", "CurrentVersion", m)
-			if err != nil {
-				return salVersion, err
-			}
+			// m := structs.Map(salVersion)
+			// err := firestore.SetDocument(ctx, "Settings", "CurrentVersion", m)
+			// if err != nil {
+			// 	return salVersion, err
+			// }
 			return salVersion, nil
 		}
 	}
