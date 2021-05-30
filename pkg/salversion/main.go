@@ -88,7 +88,7 @@ func saveData(ctx context.Context, r *http.Request) error {
 	m := structs.Map(salCheckin)
 	err = firestore.SetDocument(ctx, "SalCheckins", salCheckin.ID, m)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "Write to Firestore")
 	}
 	return nil
 }
@@ -97,7 +97,7 @@ func salVersion(ctx context.Context) (string, error) {
 
 	currentVersion, err := getSalVersion(ctx)
 	if err != nil {
-		return "", err
+		return "", errors.Wrap(err, "getSalVersion")
 	}
 
 	return currentVersion.CurrentVersion, nil
@@ -115,12 +115,12 @@ func getSalVersion(ctx context.Context) (SalVersion, error) {
 
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
-		return salVersion, err
+		return salVersion, errors.Wrap(err, "New Request to github")
 	}
 
 	res, err := client.Do(req)
 	if err != nil {
-		return salVersion, err
+		return salVersion, errors.Wrap(err, "Do request")
 	}
 
 	if res.Body != nil {
@@ -129,12 +129,12 @@ func getSalVersion(ctx context.Context) (SalVersion, error) {
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return salVersion, err
+		return salVersion, errors.Wrap(err, "Read body")
 	}
 
 	err = json.Unmarshal(body, &githubReleases)
 	if err != nil {
-		return salVersion, err
+		return salVersion, errors.Wrap(err, "Unmarshal json")
 	}
 
 	for _, item := range githubReleases {
