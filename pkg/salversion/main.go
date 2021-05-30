@@ -120,7 +120,7 @@ func getSalVersion(ctx context.Context) (SalVersion, error) {
 
 	res, err := client.Do(req)
 	if err != nil {
-		return salVersion, errors.Wrap(err, "Do request")
+		return salVersion, errors.Wrap(err, "Do request to github")
 	}
 
 	if res.Body != nil {
@@ -129,12 +129,13 @@ func getSalVersion(ctx context.Context) (SalVersion, error) {
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return salVersion, errors.Wrap(err, "Read body")
+		return salVersion, errors.Wrap(err, "Read body from github releases")
 	}
 
 	err = json.Unmarshal(body, &githubReleases)
 	if err != nil {
-		return salVersion, errors.Wrap(err, "Unmarshal json")
+		log.Error(string(body))
+		return salVersion, errors.Wrap(err, "Unmarshal json from github releases")
 	}
 
 	for _, item := range githubReleases {
