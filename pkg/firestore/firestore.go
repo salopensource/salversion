@@ -2,7 +2,6 @@ package firestore
 
 import (
 	"context"
-	"fmt"
 
 	"cloud.google.com/go/firestore"
 	"github.com/salopensource/salversion/pkg/common"
@@ -40,7 +39,7 @@ func QueryDocuments(ctx context.Context, collection string, field string, operat
 			return docs, err
 		}
 		docs = append(docs, doc)
-		fmt.Println(doc.Data())
+		// fmt.Println(doc.Data())
 	}
 
 	return docs, nil
