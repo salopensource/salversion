@@ -19,9 +19,14 @@ func init() {
 
 func main() {
 	ctx := context.Background()
+	go getVersion(ctx)
 	r := mux.NewRouter()
+	if Version == "" {
+		log.Info("Waiting for version")
+		time.Sleep(5 * time.Second)
+	}
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		salversion.PostHandler(w, r, Version)
+		salversion.PostHandler(w, r, Version, ctx)
 	}).Methods("POST")
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		salversion.GetHandler(w, r, Version)
@@ -33,7 +38,6 @@ func main() {
 		port = "8080"
 		log.Infof("Defaulting to port %s", port)
 	}
-	go getVersion(ctx)
 	log.Printf("Listening on port %s", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Error(err)

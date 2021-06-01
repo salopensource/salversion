@@ -43,9 +43,8 @@ func GetHandler(w http.ResponseWriter, r *http.Request, version string) {
 	_, _ = w.Write([]byte(version))
 }
 
-func PostHandler(w http.ResponseWriter, r *http.Request, version string) {
+func PostHandler(w http.ResponseWriter, r *http.Request, version string, ctx context.Context) {
 	log.Info("Handling POST request")
-	ctx := context.Background()
 	err := saveData(ctx, r)
 	if err != nil {
 		log.Error(err)
