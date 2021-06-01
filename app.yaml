@@ -1,8 +1,0 @@
-runtime: go114 # replace with go111 for Go 1.11
-main: ./cmd/salversion
-handlers:
-  - url: .*
-    secure: always
-    script: auto
-env_variables:
-  PROJECT_ID: salversion-65e7

@@ -1,0 +1,9 @@
+name: Build and deploy
+on: [push, pull_request]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v2.5.2
