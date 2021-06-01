@@ -48,6 +48,6 @@ func getVersion(ctx context.Context) {
 		}
 		Version = salVersion.CurrentVersion
 		log.Info(Version)
-		time.Sleep(1 * time.Hour)
+		time.Sleep(5 * time.Minute)
 	}
 }
