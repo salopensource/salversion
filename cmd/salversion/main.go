@@ -32,7 +32,7 @@ func main() {
 		port = "8080"
 		log.Infof("Defaulting to port %s", port)
 	}
-
+	go getVersion()
 	log.Printf("Listening on port %s", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Error(err)

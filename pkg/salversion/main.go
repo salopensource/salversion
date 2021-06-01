@@ -81,15 +81,15 @@ func saveData(ctx context.Context, r *http.Request) error {
 	return nil
 }
 
-func salVersion(ctx context.Context) (string, error) {
+// func salVersion(ctx context.Context) (string, error) {
 
-	currentVersion, err := GetSalVersion(ctx)
-	if err != nil {
-		return "", errors.Wrap(err, "getSalVersion")
-	}
+// 	currentVersion, err := GetSalVersion(ctx)
+// 	if err != nil {
+// 		return "", errors.Wrap(err, "getSalVersion")
+// 	}
 
-	return currentVersion.CurrentVersion, nil
-}
+// 	return currentVersion.CurrentVersion, nil
+// }
 
 func GetSalVersion(ctx context.Context) (SalVersion, error) {
 	log.Info("Getting Sal Version")
@@ -127,7 +127,7 @@ func GetSalVersion(ctx context.Context) (SalVersion, error) {
 	}
 
 	for _, item := range githubReleases {
-		if item.Draft == false && item.PreRelease == false {
+		if !item.Draft && !item.PreRelease {
 			salVersion.CurrentVersion = item.TagName
 			salVersion.LastChecked = time.Now()
 
