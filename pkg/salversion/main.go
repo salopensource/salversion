@@ -40,7 +40,7 @@ type GithubRelease struct {
 
 func GetHandler(w http.ResponseWriter, r *http.Request, version string) {
 	log.Info("Handling GET request")
-	w.Write([]byte(version))
+	_, _ = w.Write([]byte(version))
 }
 
 func PostHandler(w http.ResponseWriter, r *http.Request, version string) {
@@ -53,7 +53,7 @@ func PostHandler(w http.ResponseWriter, r *http.Request, version string) {
 		return
 	}
 
-	w.Write([]byte(version))
+	_, _ = w.Write([]byte(version))
 }
 
 func saveData(ctx context.Context, r *http.Request) error {
