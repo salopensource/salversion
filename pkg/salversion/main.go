@@ -38,19 +38,12 @@ type GithubRelease struct {
 	TagName    string `json:"tag_name"`
 }
 
-func GetHandler(w http.ResponseWriter, r *http.Request) {
+func GetHandler(w http.ResponseWriter, r *http.Request, version string) {
 	log.Info("Handling GET request")
-	ctx := context.Background()
-	version, err := salVersion(ctx)
-	if err != nil {
-		log.Error(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
 	w.Write([]byte(version))
 }
 
-func PostHandler(w http.ResponseWriter, r *http.Request) {
+func PostHandler(w http.ResponseWriter, r *http.Request, version string) {
 	log.Info("Handling POST request")
 	ctx := context.Background()
 	err := saveData(ctx, r)
@@ -59,12 +52,7 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	version, err := salVersion(ctx)
-	if err != nil {
-		log.Error(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+
 	w.Write([]byte(version))
 }
 
@@ -95,7 +83,7 @@ func saveData(ctx context.Context, r *http.Request) error {
 
 func salVersion(ctx context.Context) (string, error) {
 
-	currentVersion, err := getSalVersion(ctx)
+	currentVersion, err := GetSalVersion(ctx)
 	if err != nil {
 		return "", errors.Wrap(err, "getSalVersion")
 	}
@@ -103,7 +91,7 @@ func salVersion(ctx context.Context) (string, error) {
 	return currentVersion.CurrentVersion, nil
 }
 
-func getSalVersion(ctx context.Context) (SalVersion, error) {
+func GetSalVersion(ctx context.Context) (SalVersion, error) {
 	log.Info("Getting Sal Version")
 	url := "https://api.github.com/repos/salopensource/sal/releases"
 	var salVersion SalVersion

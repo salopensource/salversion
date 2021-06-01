@@ -12,7 +12,7 @@ jobs:
           project_id: ${{ secrets.GCS_PROJECT }}
           service_account_key: ${{ secrets.GCS_SA_KEY }}
           export_default_credentials: true
-      - name: Deploy
-        if: github.ref == 'refs/heads/master'
-        run: |-
-          gcloud app deploy --quiet
+      # - name: Deploy
+      #   if: github.ref == 'refs/heads/master'
+      #   run: |-
+      #     gcloud builds submit --tag gcr.io/${{ secrets.GCS_PROJECT }}/salversion:$GITHUB_RUN_NUMBER --project ${{ secrets.GCS_PROJECT }}
