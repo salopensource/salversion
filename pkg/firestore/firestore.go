@@ -11,8 +11,6 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-var client *firestore.Client
-
 func SetupClient(ctx context.Context) (*firestore.Client, error) {
 	projectID := common.GetEnv("PROJECT_ID", "notset")
 	client, err := firestore.NewClient(ctx, projectID)
